@@ -77,13 +77,13 @@ class update_company_memberships extends \core\task\scheduled_task {
             // Tracing.
             $userstring = '... '.fullname($user).' (User ID '.$user->id.'):'.PHP_EOL;
             if ($result == TOOL_COMPANYDOMAIN_COMPANY_NOTHANDLED) {
-                mtrace($userstring . '    WARNING: The user\'s auth method is configured to be handled by local_iomad_signup. ' .
+                mtrace ($userstring.'    INFO: The user\'s auth method is configured to be handled by local_iomad_signup. '.
                         'The user was not added to any company.');
             } else if ($result == TOOL_COMPANYDOMAIN_COMPANY_MULTIPLE) {
                 mtrace ($userstring.'    WARNING: Multiple companies with the given email domain found. '.
                         'The user was not added to any company.');
             } else if ($result == TOOL_COMPANYDOMAIN_COMPANY_NONE) {
-                mtrace ($userstring.'    WARNING: There isn\'t any company with the given email domain. '.
+                mtrace ($userstring.'    INFO: There isn\'t any company with the given email domain. '.
                         'The user was not added to any company.');
             } else if ($result == TOOL_COMPANYDOMAIN_COMPANY_UNCHANGED) {
                 mtrace ($userstring.'    SUCCESS: The user is already a member of a company. '.
