@@ -63,6 +63,11 @@ class update_company_memberships extends \core\task\scheduled_task {
 
         // Iterate over all users.
         foreach ($recordset as $user) {
+            // Silently skip the guest user.
+            if ($user->id == $CFG->siteguest) {
+                continue;
+            }
+
             // Increment the user counter.
             $usercount++;
 
