@@ -74,10 +74,10 @@ Please report bugs and problems on Github:
 https://github.com/lernlink/iomad-tool_companydomain/issues
 
 
-Feature proposals
------------------
+Community feature proposals
+---------------------------
 
-Due to limited resources, the functionality of this plugin is primarily implemented for our own local needs and published as-is to the community. We are aware that members of the community will have other needs and would love to see them solved by this plugin.
+The functionality of this plugin is primarily implemented for the needs of our clients and published as-is to the community. We are aware that members of the community will have other needs and would love to see them solved by this plugin.
 
 Please issue feature proposals on Github:
 https://github.com/lernlink/iomad-tool_companydomain/issues
