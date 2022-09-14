@@ -53,6 +53,26 @@ function tool_companydomain_handle_company_membership($user) {
         return TOOL_COMPANYDOMAIN_COMPANY_UNCHANGED;
     }
 
+    // If the event handler was triggered by the block_iomad_company_admin CSV upload form
+    // or the user creation wizard, return.
+    // This is a rather dirty hack, but can't be implemented otherwise.
+    // It is there to avoid adding a user to a company within a CSV upload or manual creation as IOMAD
+    // tries to add the user to the company itself in
+    // https://github.com/iomad/iomad/blob/IOMAD_39_STABLE/local/iomad/lib/user.php#L174-L178.
+    // But as there isn't a check if the user is already a member of the company (which was done 
+    // by the event handler directly after
+    // https://github.com/iomad/iomad/blob/IOMAD_39_STABLE/local/iomad/lib/user.php#L131,
+    // this would result in a DB index violation exception otherwise.
+    $backtrace = debug_backtrace();
+    foreach($backtrace as $bt) {
+        if (strpos($bt['file'], '/blocks/iomad_company_admin/') !== false &&
+		strpos($bt['function'], 'create') !== false &&
+	        strpos($bt['class'], 'company_user') !== false) {
+            return;
+	}
+    }
+    unset($backtrace);
+
     // Get this user's email domain.
     list($dump, $emaildomain) = explode('@', $user->email);
 
